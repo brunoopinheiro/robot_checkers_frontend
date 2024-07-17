@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/ui/screen/home.dart';
+import 'package:flutter_checkers_project/src/ui/screen/game.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Schyler',
       ),
-      home: const HomeScreen(),
+      home: const GameScreen(),
     );
   }
 }

@@ -26,16 +26,22 @@ class Dialog extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          content: const Text('Imagem do vitorioso'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset('assets/gifs/gif_celebration.gif', height: 100, width: 180,),
+              const Text('Mensagem de Vitoria')
+            ],
+          ),
           actions: <Widget>[
             Center(
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
                 child: const Text('Cancel'),
+              )
             )
-            )
-            
-          ],
+          ]
         ),
       ),
       child: const Text('Show Dialog'),

@@ -26,6 +26,8 @@ class Dialog extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          insetPadding: const EdgeInsets.all(60),
           content: const Text('Alerta quando não houver damas'),
           actions: <Widget>[
             Center(
