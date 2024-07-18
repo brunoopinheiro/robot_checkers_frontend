@@ -33,7 +33,15 @@ class Dialog extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
+                style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                          )
+                        )
+                    ),
+                child: const Text('Cancel', style: TextStyle(color: Color.fromARGB(255, 43, 43, 43)),),
             )
             )
             

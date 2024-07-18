@@ -35,24 +35,66 @@ class _HomeScreen extends State<HomeScreen> {
             Column(
               children: [
                 Container(
-                  color: const Color.fromARGB(55, 55, 55, 55), 
                   height: 35, 
                   width: 250,
-                  child: const Text('Título do Aplicativo', textAlign: TextAlign.center),
+                  child: const Text('Checkers Game', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
                 ),
                 Container(
-                  color: const Color.fromARGB(55, 55, 55, 55), 
-                  height: 400, 
-                  width: 600, 
-                  margin: const EdgeInsets.fromLTRB(0, 30, 0, 50),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 50),
+                  child:Image.asset('assets/images/checkers.jpg', width: 400.0, height: 400.0, ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: (){}, child: const Text('Robô')),
-                    ElevatedButton(onPressed: (){}, child: const Text('Humano')),
-                    ElevatedButton(onPressed: (){}, child: const Text('Aleatorio'))
+                    ElevatedButton(onPressed: (){},
+                    style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                          )
+                        )
+                    ), child: const Text(
+                      'Robô',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                      ),
+                    ),
+                    ),
+                    ElevatedButton(onPressed: (){},
+                    style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                          )
+                        )
+                    ), child: const Text(
+                      'Humano',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                      ),
+                    ),
+                    ),
+                    ElevatedButton(onPressed: (){},
+                    style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                          )
+                        )
+                    ), child: const Text(
+                      'Aleatório',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                      ),
+                    ),
+                    ),
                   ],
                 )
               ],

@@ -13,6 +13,7 @@ class ModalAlert extends StatelessWidget {
           child: Dialog(),
         ),
       ),
+      color: Color.fromARGB(0, 0, 0, 0),
     );
   }
 }
