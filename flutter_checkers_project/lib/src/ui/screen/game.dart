@@ -38,11 +38,7 @@ class _GameScreen extends State<GameScreen> {
                 children: [
                   Column(
                     children: [
-                      Container(
-                        width: 120,
-                        height: 120,
-                        color: const Color.fromARGB(55, 55, 55, 55),
-                      ),
+                      Image.asset('assets/images/avatar.png', width: 220, height: 220,),
                       const Text('Peças: XX')
                     ]
                   ),
@@ -53,16 +49,14 @@ class _GameScreen extends State<GameScreen> {
                         height: 400,
                         color: const Color.fromARGB(55, 55, 55, 55),
                       ),
-                      ElevatedButton(onPressed: (){}, child: const Text('Vez do Robo'))
+                      Padding(padding: const EdgeInsets.fromLTRB(0, 40, 0, 20),
+                       child: ElevatedButton(onPressed: (){}, child: const Text('Vez do Robo'))
+                      )
                     ]
                   ),
                   Column(
                     children: [
-                      Container(
-                        width: 120,
-                        height: 120,
-                        color: const Color.fromARGB(55, 55, 55, 55),
-                      ),
+                      Image.asset('assets/images/robot.jpg', width: 200, height: 200,),
                       const Text('Peças: XX')
                     ]
                   )
