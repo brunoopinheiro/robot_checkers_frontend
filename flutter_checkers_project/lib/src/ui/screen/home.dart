@@ -52,15 +52,17 @@ class _HomeScreen extends State<HomeScreen> {
                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                           const RoundedRectangleBorder(
                             borderRadius: BorderRadius.zero,
-                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56)),
                           )
-                        )
-                    ), child: const Text(
+                        ),
+                        backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
+                    ), 
+                    child: const Text(
                       'Robô',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                      ),
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                        ),
                     ),
                     ),
                     ElevatedButton(onPressed: (){},
@@ -70,29 +72,33 @@ class _HomeScreen extends State<HomeScreen> {
                             borderRadius: BorderRadius.zero,
                             side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
                           )
-                        )
-                    ), child: const Text(
+                        ),
+                        backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
+                    ), 
+                    child: const Text(
                       'Humano',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                      ),
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                        ),
                     ),
                     ),
                     ElevatedButton(onPressed: (){},
                     style: ButtonStyle(
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
-                          )
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                          side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
                         )
-                    ), child: const Text(
-                      'Aleatório',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
                       ),
+                      backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
+                    ), 
+                    child: const Text(
+                      'Aleatório',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                        ),
                     ),
                     ),
                   ],

@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         fontFamily: 'Schyler',
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255)
       ),
-      home: const GameScreen(),
+      home: const HomeScreen(),
     );
   }
 }
