@@ -28,8 +28,8 @@ class CheckerBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 600,
-      height: 600,
+      width: 400,
+      height: 400,
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -95,22 +95,27 @@ class CheckerBoard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Container(
-                    width: 30.0,
-                    height: 30.0,
-                    decoration: BoxDecoration(
-                      color: pieceColor,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          offset: const Offset(1.0, 1.0),
-                          blurRadius: 2.0,
-                        ),
-                      ],
+                  child: Center(
+                    child: InkWell(
+                      child: Container(
+                      width: 30.0,
+                      height: 30.0,
+                      decoration: BoxDecoration(
+                        color: pieceColor,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            offset: const Offset(1.0, 1.0),
+                            blurRadius: 2.0,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    onTap: () {
+                      print('Click');
+                    },
+                  )
                 ),
               ),
             )

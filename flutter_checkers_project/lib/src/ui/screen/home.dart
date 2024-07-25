@@ -68,25 +68,59 @@ class _HomeScreen extends State<HomeScreen> {
             Column(
               children: [
                 Container(
-                  height: 35, 
+                  height: 100, 
                   width: 250,
                   child: Text(
                     'Checkers Game', 
                     textAlign: TextAlign.center, 
                     style: GoogleFonts.getFont(
-                    'Play', 
-                    textStyle: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromARGB(255, 212, 212, 212)
+                      'Press Start 2P', 
+                      textStyle: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromARGB(255, 212, 212, 212)
                     ))
                     ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: const CheckerBoard(),
                 ),
-                
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  child: const Text(
+                    'Escolha a cor das peças:',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => _onColorSelected('Roxa'),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.purple),
+                      ),
+                      child: const Text(
+                        'Roxo',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () => _onColorSelected('Verde'),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.green),
+                      ),
+                      child: const Text(
+                        'Verde',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,21 +130,55 @@ class _HomeScreen extends State<HomeScreen> {
                         _selectedPlayer = 'Robô';
                         _startGame(_selectedPlayer!);
                       },
-                     child: const Text('Robô', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
+                     child: Text(
+                      'Robô', 
+                      textAlign: TextAlign.center, 
+                      style: GoogleFonts.getFont(
+                        'Play', 
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 14, 14, 14)
+                        ))
+                      ),
                      ),
                     AnimatedButton(
                       onPressed: (){
                         _selectedPlayer = 'Humano';
                         _startGame(_selectedPlayer!);
                       }, 
-                      child: const Text('Humano', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                      child: Text(
+                      'Humano', 
+                      textAlign: TextAlign.center, 
+                      style: GoogleFonts.getFont(
+                        'Play', 
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 14, 14, 14)
+                        ))
+                      ),
                     ),
                     AnimatedButton(
-                      onPressed: (){
-                        _selectedPlayer = 'Aleatorio';
-                        _startGame(_selectedPlayer!);
+                       onPressed: () {
+                        final player =
+                            ['Robô', 'Humano'][DateTime.now().second % 2];
+                        final color =
+                            ['Roxo', 'Verde'][DateTime.now().second % 2];
+                        _onColorSelected(color);
+                        _startGame(player);
                       },
-                      child: const Text('Aleatório', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, )),
+                      child: Text(
+                      'Aleatório', 
+                      textAlign: TextAlign.center, 
+                      style: GoogleFonts.getFont(
+                        'Play', 
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 14, 14, 14)
+                      ))
+                    ),
                     )
                   ],
                 )
@@ -121,5 +189,4 @@ class _HomeScreen extends State<HomeScreen> {
       ),
     );
   }
-  
 }
