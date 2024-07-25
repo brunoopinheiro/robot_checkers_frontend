@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/ui/components/board.dart';
+import 'package:flutter_checkers_project/src/ui/screen/game.dart';
+import 'package:flutter_checkers_project/src/ui/components/button3d.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});
@@ -23,6 +27,35 @@ class HomeScreen extends StatefulWidget {
 
 
 class _HomeScreen extends State<HomeScreen> {
+  String? _selectedColor;
+  String? _selectedPlayer;
+
+  void _onColorSelected(String color) {
+    setState(() {
+      _selectedColor = color;
+    });
+  }
+
+   void _startGame(String player) {
+    if (_selectedColor != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GameScreen(
+            player: player,
+            color: _selectedColor!,
+          ),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, selecione uma cor.'),
+        ),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,70 +70,48 @@ class _HomeScreen extends State<HomeScreen> {
                 Container(
                   height: 35, 
                   width: 250,
-                  child: const Text('Checkers Game', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
+                  child: Text(
+                    'Checkers Game', 
+                    textAlign: TextAlign.center, 
+                    style: GoogleFonts.getFont(
+                    'Play', 
+                    textStyle: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromARGB(255, 212, 212, 212)
+                    ))
+                    ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 50),
-                  child:Image.asset('assets/images/checkers.jpg', width: 400.0, height: 400.0, ),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: const CheckerBoard(),
                 ),
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: (){},
-                    style: ButtonStyle(
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56)),
-                          )
-                        ),
-                        backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
-                    ), 
-                    child: const Text(
-                      'Robô',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                        ),
+                    AnimatedButton(
+                      onPressed: () {
+                        _selectedPlayer = 'Robô';
+                        _startGame(_selectedPlayer!);
+                      },
+                     child: const Text('Robô', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15))
+                     ),
+                    AnimatedButton(
+                      onPressed: (){
+                        _selectedPlayer = 'Humano';
+                        _startGame(_selectedPlayer!);
+                      }, 
+                      child: const Text('Humano', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
                     ),
-                    ),
-                    ElevatedButton(onPressed: (){},
-                    style: ButtonStyle(
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
-                          )
-                        ),
-                        backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
-                    ), 
-                    child: const Text(
-                      'Humano',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                        ),
-                    ),
-                    ),
-                    ElevatedButton(onPressed: (){},
-                    style: ButtonStyle(
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                          side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
-                        )
-                      ),
-                      backgroundColor: WidgetStateProperty.all(const Color.fromARGB(255, 255, 255, 255)),
-                    ), 
-                    child: const Text(
-                      'Aleatório',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                        ),
-                    ),
-                    ),
+                    AnimatedButton(
+                      onPressed: (){
+                        _selectedPlayer = 'Aleatorio';
+                        _startGame(_selectedPlayer!);
+                      },
+                      child: const Text('Aleatório', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, )),
+                    )
                   ],
                 )
               ],

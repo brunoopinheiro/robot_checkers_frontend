@@ -6,15 +6,20 @@ class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: GameScreen(),
-      )
+      body: Center()
     );
   }
 }
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+  final String player;
+  final String color;
+
+  const GameScreen({
+    Key? key,
+    required this.player,
+    required this.color, 
+  }) : super(key: key);
 
   @override
   State<GameScreen> createState() => _GameScreen();
@@ -23,6 +28,36 @@ class GameScreen extends StatefulWidget {
 
 
 class _GameScreen extends State<GameScreen> {
+  String message = '';
+
+  void _simulatePlayerRobot() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 30,),
+              Text('Robô está jogando...')
+            ],
+          )
+        );
+      }
+    );
+
+    await Future.delayed(const Duration(seconds: 3));
+    Navigator.of(context).pop();
+
+    // vou atualizar o tabuleiro aqui
+    setState(() {
+      message = 'Robô Jogou, agora é sua vez';
+    });
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,23 +93,24 @@ class _GameScreen extends State<GameScreen> {
                 ],
               )
             ),
-              ElevatedButton(onPressed: (){},
-                          style: ButtonStyle(
-                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
-                                  side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
-                                )
-                              )
-                          ), 
-                          child: const Text(
-                            'Vez do robô',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
-                              ),
-                          ),
-                          ),
+              ElevatedButton(
+                onPressed: _simulatePlayerRobot,
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                      side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
+                    )
+                  )
+                ), 
+                child: const Text(
+                  'Vez do robô',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Color.fromARGB(255, 43, 43, 43) // insert your font size here
+                    ),
+                  ),
+              ),
           ],
         ),
       ),
