@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/ui/components/button3d.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const ModalAlert());
 
@@ -28,23 +30,24 @@ class Dialog extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           insetPadding: const EdgeInsets.all(60),
-          content: const Text('Alerta quando não houver damas'),
+          content: Text('NÃO EXISTEM MAIS DAMAS ', style: GoogleFonts.getFont('Play', textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
           actions: <Widget>[
             Center(
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                style: ButtonStyle(
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                            side: BorderSide(color: Color.fromARGB(255, 56, 56, 56))
-                          )
-                        )
+              child: Column(
+                children: [
+                  AnimatedButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: Text('Cancel', 
+                    style: GoogleFonts.getFont('Play',
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromARGB(255, 14, 14, 14))),
                     ),
-                child: const Text('Cancel', style: TextStyle(color: Color.fromARGB(255, 43, 43, 43)),),
+                  )
+                ],
+              ),
             )
-            )
-            
           ],
         ),
       ),

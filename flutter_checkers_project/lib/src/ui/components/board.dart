@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'piece.dart';
 
 class CheckerBoardApp extends StatelessWidget {
   const CheckerBoardApp({super.key});
@@ -28,8 +29,8 @@ class CheckerBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
-      height: 400,
+      width: 600,
+      height: 600,
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

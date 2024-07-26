@@ -2,10 +2,7 @@ library animated_button;
 
 import 'package:flutter/material.dart';
 
-/// Using [ShadowDegree] with values [ShadowDegree.dark] or [ShadowDegree.light]
-/// to get a darker version of the used color.
-/// [duration] in milliseconds
-///
+
 class AnimatedButton extends StatefulWidget {
   final GestureTapCallback onPressed;
   final Widget child;
@@ -18,7 +15,7 @@ class AnimatedButton extends StatefulWidget {
   final BoxShape shape;
 
   const AnimatedButton(
-      {Key? key,
+      {super.key,
         required this.onPressed,
         required this.child,
         this.enabled = true,
@@ -28,8 +25,7 @@ class AnimatedButton extends StatefulWidget {
         this.width = 120,
         this.duration = 70,
         this.shape = BoxShape.rectangle})
-      : assert(child != null),
-        super(key: key);
+      : assert(child != null);
 
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
