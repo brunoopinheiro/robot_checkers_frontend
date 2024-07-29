@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/ui/components/board.dart';
-import 'package:flutter_checkers_project/src/ui/components/button3d.dart';
-import 'package:flutter_checkers_project/src/ui/components/piece.dart';
+import 'package:flutter_checkers_project/src/presenter/components/board.dart';
+import 'package:flutter_checkers_project/src/presenter/components/button3d.dart';
+import 'package:flutter_checkers_project/src/presenter/components/piece.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GameScreen extends StatefulWidget {

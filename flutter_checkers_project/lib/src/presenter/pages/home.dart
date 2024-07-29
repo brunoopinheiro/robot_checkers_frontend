@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/ui/components/board.dart';
-import 'package:flutter_checkers_project/src/ui/screen/game.dart';
-import 'package:flutter_checkers_project/src/ui/components/button3d.dart';
+import 'package:flutter_checkers_project/src/presenter/components/board.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/game.dart';
+import 'package:flutter_checkers_project/src/presenter/components/button3d.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_checkers_project/src/ui/components/title.dart';
+import 'package:flutter_checkers_project/src/presenter/components/title.dart';
 
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});

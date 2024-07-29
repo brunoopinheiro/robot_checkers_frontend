@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/ui/screen/home.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/home.dart';
 
 
 void main() {

@@ -9,10 +9,9 @@ class RetroTitle extends StatelessWidget {
     return Center(
         child: Container(
           child: Text('Checkers Game',
-          
           textAlign: TextAlign.center,
           style: GoogleFonts.getFont(
-            'Play',
+            'Press Start 2P',
             textStyle: const TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
