@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GameScreen extends StatefulWidget {
@@ -32,24 +33,7 @@ class _GameScreenState extends State<GameScreen> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/gifs/robo.gif',
-                width: 90,
-                height: 90,
-              ),
-              Text(
-                'Robô está fazendo sua jogada...',
-                style: GoogleFonts.getFont('Play',
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 18)),
-              ),
-            ],
-          ),
-        );
+         return const ModalForm();
       },
     );
 
@@ -88,10 +72,10 @@ class _GameScreenState extends State<GameScreen> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   message,
-                  style: GoogleFonts.getFont('Play',
+                  style: GoogleFonts.getFont('Black Ops One',
                       fontSize: 28.0,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 255, 255, 255)),
+                      color: Color.fromARGB(255, 198, 198, 198)),
                 ),
               ),
             Padding(
@@ -138,16 +122,16 @@ class _GameScreenState extends State<GameScreen> {
             ),
             AnimatedButton(
               onPressed: _simulatePlayerRobot,
-              height: 40,
-              width: 120,
+              height: 55,
+              width: 180,
               child: Text(
                 'Vez do Robô',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.getFont('Play',
+                style: GoogleFonts.getFont('Black Ops One',
                     textStyle: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         fontWeight: FontWeight.w700,
-                        color: Color.fromARGB(255, 14, 14, 14))),
+                        color: Color.fromARGB(255, 104, 104, 104))),
               ),
             ),
           ],

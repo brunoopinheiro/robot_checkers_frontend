@@ -74,7 +74,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                    color: widget.enabled ? widget.color : Colors.grey,
+                    color: widget.enabled ? widget.color : const Color.fromARGB(255, 84, 84, 84),
                     borderRadius: widget.shape != BoxShape.circle
                         ? const BorderRadius.all(
                       Radius.circular(16),

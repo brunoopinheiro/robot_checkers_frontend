@@ -38,7 +38,6 @@ class _PlayScreen extends State<PlayScreen> {
         return const ModalForm();
       },
     );
-    print('click');
   }
 
   @override
@@ -72,10 +71,9 @@ class _PlayScreen extends State<PlayScreen> {
                     'Play',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
-                      'Play',
+                      'Black Ops One',
                       textStyle: const TextStyle(
                         fontSize: 22,
-                        fontWeight: FontWeight.w700,
                         color: Colors.black,
                       ),
                     ),

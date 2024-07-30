@@ -29,11 +29,12 @@ class _ModalForm extends State<ModalForm>{
     return Scaffold(
       body: SafeArea(
         child: AlertDialog(
+          backgroundColor: Color.fromARGB(55, 151, 151, 151),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Menu', style: GoogleFonts.getFont('Black Ops One', fontSize: 30),),
+              Text('Menu', style: GoogleFonts.getFont('Black Ops One', fontSize: 30, color: Color.fromARGB(255, 255, 255, 255)),),
             ],
           ),
           actions: <Widget>[
@@ -44,7 +45,7 @@ class _ModalForm extends State<ModalForm>{
                     margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
                     child: Column(
                     children: [
-                    Text('CHECKER COLOR', style: GoogleFonts.getFont('Black Ops One'),),
+                    Text('CHECKER COLOR', style: GoogleFonts.getFont('Black Ops One', color: Color.fromARGB(255, 255, 255, 255)), ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                         child: const Row(
@@ -62,24 +63,24 @@ class _ModalForm extends State<ModalForm>{
                   Container(
                     margin:  const EdgeInsets.fromLTRB(0, 20, 0, 10),
                     child: Column(
-                      children: [
-                        Text('PLAYER', style: GoogleFonts.getFont('Black Ops One')),
+                      children: [ 
+                        Text('PLAYER', style: GoogleFonts.getFont('Black Ops One', color: Color.fromARGB(255, 255, 255, 255))),
                         Container(
-                          margin:  const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                          margin:  const EdgeInsets.fromLTRB(0, 20, 0, 45),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ElevatedButton(onPressed: (){}, child: const Text('Robô'),),
-                              ElevatedButton(onPressed: (){}, child: const Text('Humano')),
-                              ElevatedButton(onPressed: (){}, child: const Text('Aleatório'))
+                              Image.asset('assets/images/robot_avatar.png', width: 80, height: 80, ),
+                              const SizedBox(width: 40,),
+                              Image.asset('assets/images/human_avatar.png', width: 80, height: 80,),
+                              const SizedBox(width: 40,),
+                              Image.asset('assets/images/dado.png', width: 80, height: 80,),
                             ],
                           ),
                         )
                       ],
                     ),
                   ),
-                  Text('AVATAR', style: GoogleFonts.getFont('Black Ops One')),
                   AnimatedButton(
                     onPressed: () {
                       Navigator.push(
