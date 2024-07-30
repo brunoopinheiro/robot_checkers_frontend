@@ -3,7 +3,6 @@ import 'package:flutter_checkers_project/src/presenter/pages/components/board.da
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/title.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/modal_form_play.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyWidget extends StatelessWidget {

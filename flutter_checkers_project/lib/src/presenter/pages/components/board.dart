@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'piece.dart';
+//import 'piece.dart';
 
 class CheckerBoardApp extends StatelessWidget {
   const CheckerBoardApp({super.key});
@@ -113,9 +113,6 @@ class CheckerBoard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: () {
-                      print('Click');
-                    },
                   )
                 ),
               ),

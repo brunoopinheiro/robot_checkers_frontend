@@ -25,9 +25,11 @@ class AnimatedButton extends StatefulWidget {
         required this.width,
         this.duration = 70,
         this.shape = BoxShape.rectangle})
+      // ignore: unnecessary_null_comparison
       : assert(child != null);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
@@ -38,13 +40,14 @@ class _AnimatedButtonState extends State<AnimatedButton> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final double _height = widget.height - _shadowHeight;
 
     return GestureDetector(
       onTapDown: widget.enabled ? _pressed : null,
       onTapUp: widget.enabled ? _unPressedOnTapUp : null,
       onTapCancel: widget.enabled ? _unPressed : null,
-      child: Container(
+      child: SizedBox(
         width: widget.width,
         height: _height + _shadowHeight,
         child: Stack(
@@ -74,7 +77,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                    color: widget.enabled ? widget.color : const Color.fromARGB(255, 84, 84, 84),
+                    color: widget.enabled ? widget.color : Colors.grey,
                     borderRadius: widget.shape != BoxShape.circle
                         ? const BorderRadius.all(
                       Radius.circular(16),

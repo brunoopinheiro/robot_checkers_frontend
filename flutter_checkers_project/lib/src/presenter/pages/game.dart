@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,11 +10,11 @@ class GameScreen extends StatefulWidget {
   //final String robotColor;
 
   const GameScreen({
-    Key? key,
+    super.key,
     //required this.player,
     //required this.humanColor,
     //required this.robotColor,
-  }) : super(key: key);
+  });
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -130,8 +129,7 @@ class _GameScreenState extends State<GameScreen> {
                 style: GoogleFonts.getFont('Black Ops One',
                     textStyle: const TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromARGB(255, 104, 104, 104))),
+                        color: Color.fromARGB(255, 24, 24, 24))),
               ),
             ),
           ],

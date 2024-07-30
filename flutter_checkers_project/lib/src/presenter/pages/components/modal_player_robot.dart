@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/game.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyWidget extends StatelessWidget {
@@ -29,7 +26,7 @@ class _ModalForm extends State<ModalForm>{
     return Scaffold(
       body: SafeArea(
         child: AlertDialog(
-          backgroundColor: Color.fromARGB(55, 151, 151, 151),
+          backgroundColor: const Color.fromARGB(55, 151, 151, 151),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
