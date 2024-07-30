@@ -29,7 +29,6 @@ class AnimatedButton extends StatefulWidget {
       : assert(child != null);
 
   @override
-  // ignore: library_private_types_in_public_api
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
@@ -40,7 +39,6 @@ class _AnimatedButtonState extends State<AnimatedButton> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: no_leading_underscores_for_local_identifiers
     final double _height = widget.height - _shadowHeight;
 
     return GestureDetector(

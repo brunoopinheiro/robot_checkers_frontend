@@ -79,11 +79,35 @@ class _ModalForm extends State<ModalForm>{
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('assets/images/robot_avatar.png', width: 80, height: 80, ),
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/robot_avatar.png', width: 80, height: 80, ),
+                                    const Text('Robô', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),))
+                                  ],
+                                )
+                              ),
                               const SizedBox(width: 40,),
-                              Image.asset('assets/images/human_avatar.png', width: 80, height: 80,),
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/human_avatar.png', width: 80, height: 80, ),
+                                    const Text('Humano',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),))
+                                  ],
+                                )
+                              ),
                               const SizedBox(width: 40,),
-                              Image.asset('assets/images/dado.png', width: 80, height: 80,),
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/images/dado.png', width: 80, height: 80, ),
+                                    const Text('Dado',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),))
+                                  ],
+                                )
+                              ),
                             ],
                           ),
                         )

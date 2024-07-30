@@ -121,14 +121,14 @@ class _GameScreenState extends State<GameScreen> {
             ),
             AnimatedButton(
               onPressed: _simulatePlayerRobot,
-              height: 55,
+              height: 50,
               width: 180,
               child: Text(
                 'Vez do Robô',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.getFont('Black Ops One',
                     textStyle: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Color.fromARGB(255, 24, 24, 24))),
               ),
             ),

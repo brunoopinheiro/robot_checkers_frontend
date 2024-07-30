@@ -48,39 +48,46 @@ class _PlayScreen extends State<PlayScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-                child: const RetroTitle()
-              ),
+               margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+               child: const CheckerBoard(),
+               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                child: const CheckerBoard(),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AnimatedButton(
-                    height: 50,
-                    width: 140,
-                    onPressed: (){
-                      _startGame = 'play';
-                      _onStartGame(_startGame!);
-                      _openModal(context);
-                    }, 
-                    child: Text(
-                    'Play',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.getFont(
-                      'Black Ops One',
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        color: Colors.black,
-                      ),
+                color: Color.fromARGB(132, 109, 109, 109),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: const RetroTitle()
                     ),
-                  ),)
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedButton(
+                          height: 50,
+                          width: 140,
+                          onPressed: (){
+                            _startGame = 'play';
+                            _onStartGame(_startGame!);
+                            _openModal(context);
+                          }, 
+                          child: Text(
+                          'Play',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.getFont(
+                            'Black Ops One',
+                            textStyle: const TextStyle(
+                              fontSize: 22,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),)
+                      ],
+                    ),
+                  ],
+                )
               )
-            ],
-          ),
+            ]
+          )
         )
     );
   }
