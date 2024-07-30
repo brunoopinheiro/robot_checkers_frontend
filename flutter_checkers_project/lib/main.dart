@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/home.dart';
-
+import 'package:flutter_checkers_project/src/presenter/pages/play.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Schyler',
         scaffoldBackgroundColor: Color.fromARGB(255, 5, 7, 24)
       ),
-      home: const HomeScreen(),
+      home: const PlayScreen(),
     );
   }
 }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/components/board.dart';
-import 'package:flutter_checkers_project/src/presenter/components/button3d.dart';
-import 'package:flutter_checkers_project/src/presenter/components/piece.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GameScreen extends StatefulWidget {
-  final String player;
-  final String humanColor;
-  final String robotColor;
+  //final String player;
+  //final String humanColor;
+  //final String robotColor;
 
   const GameScreen({
     Key? key,
-    required this.player,
-    required this.humanColor,
-    required this.robotColor,
+    //required this.player,
+    //required this.humanColor,
+    //required this.robotColor,
   }) : super(key: key);
 
   @override
@@ -61,21 +61,21 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  Color _getColorFromName(String colorName) {
-    switch (colorName) {
-      case 'Roxo':
-        return Colors.purple;
-      case 'Verde':
-        return Colors.green;
-      default:
-        return Colors.transparent;
-    }
-  }
+  // Color _getColorFromName(String colorName) {
+  //   switch (colorName) {
+  //     case 'Roxo':
+  //       return Colors.purple;
+  //     case 'Verde':
+  //       return Colors.green;
+  //     default:
+  //       return Colors.transparent;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    Color humanPieceColor = _getColorFromName(widget.humanColor);
-    Color robotPieceColor = _getColorFromName(widget.robotColor);
+    //Color humanPieceColor = _getColorFromName(widget.humanColor);
+    //Color robotPieceColor = _getColorFromName(widget.robotColor);
 
     return Scaffold(
       body: SafeArea(
@@ -110,10 +110,10 @@ class _GameScreenState extends State<GameScreen> {
                           fontSize: 25,
                         ),
                       ),
-                      Piece(
-                        color: robotPieceColor,
-                        size: 60.0,
-                      ),
+                      // Piece(
+                      //   //color: robotPieceColor,
+                      //   size: 60.0,
+                      // ),
                     ],
                   ),
                   const Column(children: [CheckerBoard()]),
@@ -127,10 +127,10 @@ class _GameScreenState extends State<GameScreen> {
                           fontSize: 25,
                         ),
                       ),
-                      Piece(
-                        color: humanPieceColor,
-                        size: 60.0,
-                      )
+                      // Piece(
+                      //   //color: humanPieceColor,
+                      //   size: 60.0,
+                      // )
                     ],
                   ),
                 ],
@@ -138,6 +138,8 @@ class _GameScreenState extends State<GameScreen> {
             ),
             AnimatedButton(
               onPressed: _simulatePlayerRobot,
+              height: 40,
+              width: 120,
               child: Text(
                 'Vez do Robô',
                 textAlign: TextAlign.center,

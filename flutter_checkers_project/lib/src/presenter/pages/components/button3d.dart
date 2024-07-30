@@ -20,9 +20,9 @@ class AnimatedButton extends StatefulWidget {
         required this.child,
         this.enabled = true,
         this.color = const Color.fromARGB(255, 212, 212, 212),
-        this.height = 40,
+        required this.height,
         this.shadowDegree = ShadowDegree.light,
-        this.width = 120,
+        required this.width,
         this.duration = 70,
         this.shape = BoxShape.rectangle})
       : assert(child != null);

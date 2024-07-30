@@ -8,12 +8,12 @@ class RetroTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-          child: Text('Checkers Game',
+          child: Text('CHECKERS DELUX',
           textAlign: TextAlign.center,
           style: GoogleFonts.getFont(
-            'Press Start 2P',
+            'Black Ops One',
             textStyle: const TextStyle(
-              fontSize: 30,
+              fontSize: 48,
               fontWeight: FontWeight.bold,
               color: Color.fromARGB(255, 216, 216, 216),
               shadows: [

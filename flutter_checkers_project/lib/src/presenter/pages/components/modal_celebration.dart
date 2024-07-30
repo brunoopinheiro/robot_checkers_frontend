@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/components/button3d.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const ModalAlert());
@@ -43,6 +43,8 @@ class Dialog extends StatelessWidget {
                 children: [
                   AnimatedButton(
                     onPressed: () => Navigator.pop(context, 'Cancel'),
+                    height: 40,
+                    width: 120,
                     child: Text('Cancel', 
                     style: GoogleFonts.getFont('Play',
                       textStyle: const TextStyle(
