@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
 

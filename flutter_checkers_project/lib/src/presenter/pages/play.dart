@@ -30,23 +30,20 @@ class _PlayScreen extends State<PlayScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: const Column(
-                        children: [
-                          RetroTitle(),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
+                      color: Color.fromARGB(255, 5, 7, 24),
                       child: Column(
                         children: [
-                          AnimatedButton(
-                            height: 50,
-                            width: 140,
-                            onPressed: () {
-                              _playStore.onStartGame('play');
-                              _playStore.openModal(context);
+                          RetroTitle(),
+                          Container(
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 60),
+                          child: Column(
+                            children: [
+                              AnimatedButton(
+                                height: 50,
+                                width: 140,
+                                onPressed: () {
+                                  _playStore.onStartGame('play');
+                                  _playStore.openModal(context);
                             },
                             child: Text(
                               'Play',
@@ -61,6 +58,9 @@ class _PlayScreen extends State<PlayScreen> {
                             ),
                           ),
                         ]
+                      ),
+                    )
+                        ],
                       ),
                     )
                   ],
