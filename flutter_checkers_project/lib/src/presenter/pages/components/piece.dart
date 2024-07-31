@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/piece_store.dart';
 
 class Piece extends StatelessWidget {
   final Color color;

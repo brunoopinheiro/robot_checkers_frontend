@@ -1,7 +1,4 @@
-library animated_button;
-
 import 'package:flutter/material.dart';
-
 
 class AnimatedButton extends StatefulWidget {
   final GestureTapCallback onPressed;
@@ -14,19 +11,18 @@ class AnimatedButton extends StatefulWidget {
   final int duration;
   final BoxShape shape;
 
-  const AnimatedButton(
-      {super.key,
-        required this.onPressed,
-        required this.child,
-        this.enabled = true,
-        this.color = const Color.fromARGB(255, 212, 212, 212),
-        required this.height,
-        this.shadowDegree = ShadowDegree.light,
-        required this.width,
-        this.duration = 70,
-        this.shape = BoxShape.rectangle})
-      // ignore: unnecessary_null_comparison
-      : assert(child != null);
+  const AnimatedButton({
+    super.key,
+    required this.onPressed,
+    required this.child,
+    this.enabled = true,
+    this.color = const Color.fromARGB(255, 212, 212, 212),
+    required this.height,
+    this.shadowDegree = ShadowDegree.light,
+    required this.width,
+    this.duration = 70,
+    this.shape = BoxShape.rectangle,
+  });
 
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
@@ -56,15 +52,14 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                    color: widget.enabled
-                        ? darken(widget.color, widget.shadowDegree)
-                        : darken(Colors.grey, widget.shadowDegree),
-                    borderRadius: widget.shape != BoxShape.circle
-                        ? const BorderRadius.all(
-                      Radius.circular(16),
-                    )
-                        : null,
-                    shape: widget.shape),
+                  color: widget.enabled
+                      ? darken(widget.color, widget.shadowDegree)
+                      : darken(Colors.grey, widget.shadowDegree),
+                  borderRadius: widget.shape != BoxShape.circle
+                      ? const BorderRadius.all(Radius.circular(16))
+                      : null,
+                  shape: widget.shape,
+                ),
               ),
             ),
             AnimatedPositioned(
@@ -75,13 +70,12 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                    color: widget.enabled ? widget.color : Colors.grey,
-                    borderRadius: widget.shape != BoxShape.circle
-                        ? const BorderRadius.all(
-                      Radius.circular(16),
-                    )
-                        : null,
-                    shape: widget.shape),
+                  color: widget.enabled ? widget.color : Colors.grey,
+                  borderRadius: widget.shape != BoxShape.circle
+                      ? const BorderRadius.all(Radius.circular(16))
+                      : null,
+                  shape: widget.shape,
+                ),
                 child: Center(
                   child: widget.child,
                 ),
@@ -93,6 +87,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
     );
   }
 
+//store
   void _pressed(_) {
     setState(() {
       _position = 0;
@@ -107,15 +102,13 @@ class _AnimatedButtonState extends State<AnimatedButton> {
     });
     widget.onPressed();
   }
-}
 
-
-Color darken(Color color, ShadowDegree degree) {
-  double amount = degree == ShadowDegree.dark ? 0.3 : 0.12;
-  final hsl = HSLColor.fromColor(color);
-  final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
-
-  return hslDark.toColor();
+  Color darken(Color color, ShadowDegree degree) {
+    double amount = degree == ShadowDegree.dark ? 0.3 : 0.12;
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    return hslDark.toColor();
+  }
 }
 
 enum ShadowDegree { light, dark }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 //import 'piece.dart';
 
 class CheckerBoardApp extends StatelessWidget {
@@ -28,6 +30,8 @@ class CheckerBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final boardState = BoardStore(); 
+
     return Container(
       width: 600,
       height: 600,
@@ -36,33 +40,20 @@ class CheckerBoard extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 8,
         ),
-        itemBuilder: _buildGridItems,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildGridItems(context, index, boardState);
+        },
         itemCount: 64,
       ),
     );
   }
 
-  Widget _buildGridItems(BuildContext context, int index) {
+  Widget _buildGridItems(
+      BuildContext context, int index, BoardStore boardState) {
     final int row = index ~/ 8;
     final int column = index % 8;
-    final bool isWhiteSquare =
-        (row % 2 == 0 && column % 2 == 1) || (row % 2 == 1 && column % 2 == 0);
-
-    final Color squareColor = isWhiteSquare
-        ? const Color.fromARGB(255, 219, 219, 219)
-        : const Color.fromARGB(255, 32, 32, 32);
-
-    bool isQueenPiece = isWhiteSquare && (row < 3 || row > 4);
-
-    Color pieceColor = Colors.transparent;
-    if (isQueenPiece) {
-      if (row < 3) {
-        pieceColor = Colors.purple; 
-      } else {
-        pieceColor = const Color.fromARGB(
-            255, 22, 122, 25); 
-      }
-    }
+    final Color squareColor = boardState.getSquareColor(row, column);
+    final Color? pieceColor = boardState.getPieceColor(row, column);
 
     return Container(
       decoration: BoxDecoration(
@@ -78,43 +69,13 @@ class CheckerBoard extends StatelessWidget {
             offset: const Offset(4.0, 4.0),
             blurRadius: 2.0,
           ),
-        ], 
+        ],
       ),
-      child: isQueenPiece
+      child: pieceColor != null
           ? Center(
-              child: Container(
-                width: 45.0,
-                height: 45.0,
-                decoration: BoxDecoration(
-                  color: pieceColor,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      offset: const Offset(2.0, 2.0),
-                      blurRadius: 4.0,
-                    ),
-                  ],
-                ),
-                  child: Center(
-                    child: InkWell(
-                      child: Container(
-                      width: 30.0,
-                      height: 30.0,
-                      decoration: BoxDecoration(
-                        color: pieceColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
-                            offset: const Offset(1.0, 1.0),
-                            blurRadius: 2.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ),
+              child: Piece(
+                size: 40,
+                color: pieceColor,
               ),
             )
           : null,

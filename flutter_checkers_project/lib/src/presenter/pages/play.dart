@@ -2,17 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/title.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/modal_form_play.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/play_store.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const PlayScreen();
-  }
-}
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -22,76 +13,64 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreen extends State<PlayScreen> {
-  String? _startGame;
-
-  void _onStartGame(String playGame) {
-    setState(() {
-      _startGame = playGame;
-    });
-  }
-
-  void _openModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return const ModalForm();
-      },
-    );
-  }
+  final PlayStore _playStore = PlayStore();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Container(
-               margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-               child: const CheckerBoard(),
-               ),
-              Container(
-                color: Color.fromARGB(132, 109, 109, 109),
+              const CheckerBoard(),
+              Align(
+                alignment: Alignment.center,
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      child: const RetroTitle()
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: const Column(
+                        children: [
+                          RetroTitle(),
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedButton(
-                          height: 50,
-                          width: 140,
-                          onPressed: (){
-                            _startGame = 'play';
-                            _onStartGame(_startGame!);
-                            _openModal(context);
-                          }, 
-                          child: Text(
-                          'Play',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.getFont(
-                            'Black Ops One',
-                            textStyle: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.black,
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: [
+                          AnimatedButton(
+                            height: 50,
+                            width: 140,
+                            onPressed: () {
+                              _playStore.onStartGame('play');
+                              _playStore.openModal(context);
+                            },
+                            child: Text(
+                              'Play',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.getFont(
+                                'Black Ops One',
+                                textStyle: const TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
-                        ),)
-                      ],
-                    ),
+                        ]
+                      ),
+                    )
                   ],
-                )
-              )
-            ]
-          )
-        )
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
-  
 }
-
 

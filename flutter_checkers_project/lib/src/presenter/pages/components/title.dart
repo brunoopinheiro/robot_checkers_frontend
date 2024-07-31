@@ -12,7 +12,7 @@ class RetroTitle extends StatelessWidget {
         style: GoogleFonts.getFont(
           'Black Ops One',
           textStyle: const TextStyle(
-            fontSize: 68,
+            fontSize: 72,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 216, 216, 216),
             shadows: [
