@@ -9,7 +9,7 @@ class GameScreen extends StatelessWidget {
     Key? key,
     required this.playerPieceColor,
     required this.robotPieceColor,
-    required this.startingPlayer,
+    required this.startingPlayer, required String pieceColor,
   }) : super(key: key);
 
   final String playerPieceColor;

@@ -24,13 +24,17 @@ class GameStore with ChangeNotifier {
   }
 
   void updateSelections(String player, String color) {
-    setStartingPlayer(player);
     setPlayerPieceColor(color);
+    setStartingPlayer(player);
   }
 
+
   void simulatePlayerRobot(BuildContext context) {
-    // Simulate the robot's move
     message = 'Robô fez um movimento!';
     notifyListeners();
+  }
+
+  String getRandomStartingPlayer() {
+    return (DateTime.now().millisecondsSinceEpoch % 2 == 0) ? 'Humano' : 'Robô';
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/game.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/form_store.dart';
+import 'dart:math'; 
 
 class ModalForm extends StatefulWidget {
   const ModalForm({super.key});
@@ -14,7 +16,8 @@ class _ModalForm extends State<ModalForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AlertDialog(
+      body: 
+      AlertDialog(
       title: const Text('Configuração do Jogo'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -62,8 +65,18 @@ class _ModalForm extends State<ModalForm> {
         TextButton(
           onPressed: () async {
             int status = await _store.startGame();
-            if (status == 200) {
-              Navigator.of(context).pop();
+            if (status == 500) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => GameScreen(
+                    playerPieceColor: _store.selectedColor,
+                    robotPieceColor: _store.selectedColor == 'Verde' ? 'Roxo' : 'Verde',
+                    startingPlayer: _store.selectedPlayer == 'Aleatório'
+                        ? (Random().nextBool() ? 'Humano' : 'Robô')
+                        : _store.selectedPlayer, pieceColor: '',
+                  ),
+                ),
+              );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Erro ao iniciar o jogo')),
@@ -73,7 +86,7 @@ class _ModalForm extends State<ModalForm> {
           child: Text('Start'),
         ),
       ],
-      )
+      ),
     );
   }
 }
