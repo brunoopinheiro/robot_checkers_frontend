@@ -1,47 +1,49 @@
-import 'dart:math';
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:math';  
+import 'package:http/http.dart' as http;
 
-class ModalFormStore {
-  Color pieceColor = Colors.transparent;
-  String startPlayer = 'random'; 
-  Color robotPieceColor = Colors.transparent;
-  Color humanPieceColor = Colors.transparent;
+class FormStore {
+  String selectedPlayer = 'Humano';
+  String selectedColor = 'Verde';
+  String opponentColor = 'Roxo';
 
-  void setPieceColor(Color color) {
-    pieceColor = color;
+  void setSelectedPlayer(String player) {
+    selectedPlayer = player;
   }
 
-  void setStartPlayer(String player) {
-    startPlayer = player;
+  void setSelectedColor(String color) {
+    selectedColor = color;
+    opponentColor = color == 'Verde' ? 'Roxo' : 'Verde';
   }
 
-  String getRandomStartPlayer() {
-    final players = ['robot', 'human'];
-    return players[Random().nextInt(players.length)];
+  void setSelectedPlayerWithRandom() {
+    final random = Random();
+    selectedPlayer = random.nextBool() ? 'Humano' : 'Robô';  
   }
 
-  void updateRandomColors() {
-    startPlayer = getRandomStartPlayer();
-    if (startPlayer == 'robot') {
-      robotPieceColor = pieceColor;
-      humanPieceColor = pieceColor == Colors.purple ? Colors.green : Colors.purple;
-    } else {
-      humanPieceColor = pieceColor;
-      robotPieceColor = pieceColor == Colors.purple ? Colors.green : Colors.purple;
+  Future<int> startGame() async {
+    if (selectedPlayer == 'Aleatório') {
+      setSelectedPlayerWithRandom();
     }
+    
+    int player = selectedPlayer == 'Humano' ? 1 : 2;
+    final getNamesServer = GetNamesServer();
+    return await getNamesServer.getStart(player, selectedColor, opponentColor);
   }
+}
 
-  void confirmSelection() {
-    if (startPlayer == 'random') {
-      updateRandomColors();
-    } else {
-      if (startPlayer == 'robot') {
-        robotPieceColor = pieceColor;
-        humanPieceColor = pieceColor == Colors.purple ? Colors.green : Colors.purple;
-      } else {
-        humanPieceColor = pieceColor;
-        robotPieceColor = pieceColor == Colors.purple ? Colors.green : Colors.purple;
-      }
+class GetNamesServer {
+  final client = http.Client();
+
+  // função que se comunica com o servidor
+  Future<int> getStart(int player, String color1, String color2) async {
+    try {
+      final uri = Uri.parse('http://192.168.158.157:5000/game/start/$player/$color1/$color2');
+      final request = await http.get(uri);
+      return request.statusCode;
+    } catch (e) {
+      print("Problem connecting to the server ${e.toString()}");
     }
+    return 500;
   }
 }

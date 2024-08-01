@@ -12,7 +12,7 @@ class _ModalFormState extends State<ModalForm> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color.fromARGB(255, 4, 4, 22),
+      backgroundColor: Color.fromARGB(246, 202, 202, 202),
       content: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,7 +28,7 @@ class _ModalFormState extends State<ModalForm> {
             'Robô está fazendo sua jogada...',
             style: GoogleFonts.getFont('Black Ops One',
                 textStyle: const TextStyle(
-                    fontSize: 18, color: Color.fromARGB(255, 255, 255, 255))),
+                    fontSize: 18, color: Color.fromARGB(255, 15, 15, 15))),
           ),
         ],
       ),

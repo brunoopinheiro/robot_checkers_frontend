@@ -7,24 +7,24 @@ class RetroTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Text('CHECKERS DELUX',
-        textAlign: TextAlign.center,
-        style: GoogleFonts.getFont(
-          'Black Ops One',
-          textStyle: const TextStyle(
-            fontSize: 72,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 216, 216, 216),
-            shadows: [
-              Shadow(
-                offset: Offset(3.0, 3.0),
-                blurRadius: 0.0,
-                color: Color.fromARGB(255, 110, 79, 0),
-              )
-            ],
-          ),
+        child: Text(
+      'CHECKERS DELUX',
+      textAlign: TextAlign.center,
+      style: GoogleFonts.getFont(
+        'Black Ops One',
+        textStyle: const TextStyle(
+          fontSize: 72,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 223, 223, 223),
+          shadows: [
+            Shadow(
+              offset: Offset(3.0, 3.0),
+              blurRadius: 0.0,
+              color: Color.fromARGB(255, 110, 79, 0),
+            )
+          ],
         ),
-                )
-    );
+      ),
+    ));
   }
 }

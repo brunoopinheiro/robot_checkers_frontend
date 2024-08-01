@@ -1,40 +1,36 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
 
-class GameStore extends ChangeNotifier {
-  String _message = '';
-  Color _playerPieceColor = Colors.green;
-  Color _robotPieceColor = Colors.purple;
+class GameStore with ChangeNotifier {
+  String playerPieceColor = 'Verde';
+  String robotPieceColor = 'Roxo';
+  String startingPlayer = 'Aleatório';
+  String message = '';
 
-  String get message => _message;
-  Color get playerPieceColor => _playerPieceColor;
-  Color get robotPieceColor => _robotPieceColor;
-
-  void setMessage(String newMessage) {
-    _message = newMessage;
+  void updatePieceColors(String playerColor, String robotColor) {
+    playerPieceColor = playerColor;
+    robotPieceColor = robotColor;
     notifyListeners();
   }
 
-  Future<void> simulatePlayerRobot(BuildContext context) async {
-    setMessage('');
-
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const ModalForm();
-      },
-    );
-
-    setMessage('Robô jogou, agora é sua vez');
+  void setStartingPlayer(String player) {
+    startingPlayer = player;
+    notifyListeners();
   }
 
-  void updatePieceColors(Color chosenColor) {
-    _playerPieceColor = chosenColor;
-    _robotPieceColor =
-        chosenColor == Colors.green ? Colors.purple : Colors.green;
+  void setPlayerPieceColor(String color) {
+    playerPieceColor = color;
+    robotPieceColor = color == 'Verde' ? 'Roxo' : 'Verde';
+    notifyListeners();
+  }
+
+  void updateSelections(String player, String color) {
+    setStartingPlayer(player);
+    setPlayerPieceColor(color);
+  }
+
+  void simulatePlayerRobot(BuildContext context) {
+    // Simulate the robot's move
+    message = 'Robô fez um movimento!';
     notifyListeners();
   }
 }
