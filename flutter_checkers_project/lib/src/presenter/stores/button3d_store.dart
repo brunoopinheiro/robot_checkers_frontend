@@ -32,6 +32,8 @@ class ButtonStore {
   void release() {
     position = 4;
   }
+  
+  
 
   Color darken(Color color, ShadowDegree degree) {
     double amount = degree == ShadowDegree.dark ? 0.3 : 0.12;

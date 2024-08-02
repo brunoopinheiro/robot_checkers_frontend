@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/button3d_store.dart';
 
 class AnimatedButton extends StatefulWidget {
   final GestureTapCallback onPressed;
@@ -111,4 +112,3 @@ class _AnimatedButtonState extends State<AnimatedButton> {
   }
 }
 
-enum ShadowDegree { light, dark }

@@ -3,13 +3,16 @@ import 'package:flutter_checkers_project/src/presenter/pages/components/board.da
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/game_store.dart';
+import 'package:flutter_checkers_project/src/presenter/stores/simulate_player_store.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({
     Key? key,
     required this.playerPieceColor,
     required this.robotPieceColor,
-    required this.startingPlayer, required String pieceColor,
+    required this.startingPlayer,
+    required String pieceColor,
   }) : super(key: key);
 
   final String playerPieceColor;
@@ -19,11 +22,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String message = '';
-
-    void simulatePlayerRobot() {
-      message = 'Robô fez um movimento!';
-    }
-
+    final GameStore _gameStore = GameStore();
 
     Color colorFromString(String colorString) {
       switch (colorString) {
@@ -32,10 +31,9 @@ class GameScreen extends StatelessWidget {
         case 'Roxo':
           return Colors.purple;
         default:
-          return Colors.black; 
+          return Colors.black;
       }
     }
-
 
     return Scaffold(
       body: SafeArea(
@@ -71,8 +69,8 @@ class GameScreen extends StatelessWidget {
                                 'ROBÔ',
                                 style: GoogleFonts.getFont(
                                   'Play',
-                                  color: const Color.fromARGB(
-                                      255, 255, 255, 255),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   fontSize: 25,
                                 ),
                               ),
@@ -92,8 +90,8 @@ class GameScreen extends StatelessWidget {
                                 'HUMANO',
                                 style: GoogleFonts.getFont(
                                   'Play',
-                                  color: const Color.fromARGB(
-                                      255, 255, 255, 255),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   fontSize: 25,
                                 ),
                               ),
@@ -106,21 +104,22 @@ class GameScreen extends StatelessWidget {
                         ],
                       ),
                     )),
-                AnimatedButton(
-                  onPressed: () {
-                    simulatePlayerRobot();
-                  },
-                  height: 50,
-                  width: 180,
-                  color: Colors.blue,
-                  child: Text(
+                    AnimatedButton(
+                    onPressed: () {
+                      _gameStore.simulatePlayerRobot(context);
+                    },
+                    height: 50,
+                    width: 180,
+                    color: Colors.blue,
+                    child: Text(
                     'Vez do Robô',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont('Play',
                         textStyle: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: Color.fromARGB(255, 0, 0, 0)
+                    )),
                   ),
                 ),
               ],

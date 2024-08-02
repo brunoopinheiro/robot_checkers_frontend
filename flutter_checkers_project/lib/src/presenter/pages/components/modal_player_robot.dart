@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ModalForm extends StatefulWidget {
-  const ModalForm({super.key});
+class ModalPlay extends StatefulWidget {
+  const ModalPlay({super.key});
 
   @override
-  State<ModalForm> createState() => _ModalFormState();
+  State<ModalPlay> createState() => _ModalPlayRobot();
 }
 
-class _ModalFormState extends State<ModalForm> {
+class _ModalPlayRobot extends State<ModalPlay> {
+  
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -27,8 +28,8 @@ class _ModalFormState extends State<ModalForm> {
           Text(
             'Robô está fazendo sua jogada...',
             style: GoogleFonts.getFont('Black Ops One',
-                textStyle: const TextStyle(
-                    fontSize: 18, color: Color.fromARGB(255, 15, 15, 15))),
+              textStyle: const TextStyle(
+              fontSize: 18, color: Color.fromARGB(255, 15, 15, 15))),
           ),
         ],
       ),

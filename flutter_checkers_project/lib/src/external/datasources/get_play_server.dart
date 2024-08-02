@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-class GetNamesServer {
+class GetNamesServer { 
   final client = http.Client();
 
   // função que se comunica com o servidor
