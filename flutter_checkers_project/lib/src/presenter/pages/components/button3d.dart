@@ -30,13 +30,27 @@ class AnimatedButton extends StatefulWidget {
 }
 
 class _AnimatedButtonState extends State<AnimatedButton> {
-  static const Curve _curve = Curves.easeIn;
-  static const double _shadowHeight = 4;
-  double _position = 4;
+  late final ButtonStore buttonStore;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonStore = ButtonStore(
+      onPressed: widget.onPressed,
+      child: widget.child,
+      enabled: widget.enabled,
+      color: widget.color,
+      height: widget.height,
+      shadowDegree: widget.shadowDegree,
+      width: widget.width,
+      duration: widget.duration,
+      shape: widget.shape,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final double _height = widget.height - _shadowHeight;
+    final double _height = widget.height - 4;
 
     return GestureDetector(
       onTapDown: widget.enabled ? _pressed : null,
@@ -44,7 +58,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
       onTapCancel: widget.enabled ? _unPressed : null,
       child: SizedBox(
         width: widget.width,
-        height: _height + _shadowHeight,
+        height: _height + 4,
         child: Stack(
           children: <Widget>[
             Positioned(
@@ -53,9 +67,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                  color: widget.enabled
-                      ? darken(widget.color, widget.shadowDegree)
-                      : darken(Colors.grey, widget.shadowDegree),
+                  color: buttonStore.getShadowColor(),
                   borderRadius: widget.shape != BoxShape.circle
                       ? const BorderRadius.all(Radius.circular(16))
                       : null,
@@ -64,14 +76,14 @@ class _AnimatedButtonState extends State<AnimatedButton> {
               ),
             ),
             AnimatedPositioned(
-              curve: _curve,
+              curve: Curves.easeIn,
               duration: Duration(milliseconds: widget.duration),
-              bottom: _position,
+              bottom: buttonStore.position,
               child: Container(
                 height: _height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                  color: widget.enabled ? widget.color : Colors.grey,
+                  color: buttonStore.getButtonColor(),
                   borderRadius: widget.shape != BoxShape.circle
                       ? const BorderRadius.all(Radius.circular(16))
                       : null,
@@ -88,10 +100,9 @@ class _AnimatedButtonState extends State<AnimatedButton> {
     );
   }
 
-//store
   void _pressed(_) {
     setState(() {
-      _position = 0;
+      buttonStore.press();
     });
   }
 
@@ -99,16 +110,7 @@ class _AnimatedButtonState extends State<AnimatedButton> {
 
   void _unPressed() {
     setState(() {
-      _position = 4;
+      buttonStore.release();
     });
-    widget.onPressed();
-  }
-
-  Color darken(Color color, ShadowDegree degree) {
-    double amount = degree == ShadowDegree.dark ? 0.3 : 0.12;
-    final hsl = HSLColor.fromColor(color);
-    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
-    return hslDark.toColor();
   }
 }
-

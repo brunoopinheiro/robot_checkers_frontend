@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/board.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/static_board.dart'; // Atualize o caminho do import se necessário
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/title.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/play_store.dart';
@@ -13,27 +13,19 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen>
-  with SingleTickerProviderStateMixin {
-  final PlayStore _playStore = PlayStore();
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
+    with SingleTickerProviderStateMixin {
+  late PlayStore _playStore;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(seconds: 2), 
-      vsync: this,
-    )..repeat(reverse: true);
-
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
+    _playStore = PlayStore();
+    _playStore.initAnimation(this);
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _playStore.disposeAnimation();
     super.dispose();
   }
 
@@ -46,11 +38,11 @@ class _PlayScreenState extends State<PlayScreen>
             alignment: Alignment.center,
             children: [
               AnimatedBuilder(
-                animation: _scaleAnimation,
+                animation: _playStore.scaleAnimation,
                 builder: (context, child) {
                   return Transform.scale(
-                    scale: _scaleAnimation.value,
-                    child: const CheckerBoard(),
+                    scale: _playStore.scaleAnimation.value,
+                    child: const StaticBoard(), // Atualizado para StaticBoard
                   );
                 },
               ),
@@ -73,7 +65,7 @@ class _PlayScreenState extends State<PlayScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const RetroTitle(),
-                        const SizedBox(height: 10), 
+                        const SizedBox(height: 10),
                         AnimatedButton(
                           height: 50,
                           width: 140,

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_player_robot_server.dart';
-import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
+import 'package:flutter_checkers_project/src/external/datasources/get_winner_state.dart';
+import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/modal_celebration.dart';
+
 class GameStore with ChangeNotifier {
   String playerPieceColor = 'Verde';
   String robotPieceColor = 'Roxo';
   String startingPlayer = 'Aleatório';
   String message = '';
-  
-  get http => null;
+  Board? board;
 
   void updatePieceColors(String playerColor, String robotColor) {
     playerPieceColor = playerColor;
@@ -30,43 +33,43 @@ class GameStore with ChangeNotifier {
   void updateSelections(String player, String color) {
     setPlayerPieceColor(color);
     setStartingPlayer(player);
+    notifyListeners();
   }
 
-  void simulatePlayerRobot(BuildContext context) {
+  Future<void> simulatePlayerRobot(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => const ModalPlay(),
+    );
 
-    Future<Board> startGame(BuildContext context) async {
-    final getStateBoard = GetStateServer();
-    Board status =
-        await getStateBoard.fetchBoardState();
+    try {
+      final getPlayerRobotServer = GetPlayerRobotServer();
+      await getPlayerRobotServer.indicateRobotPlay();
 
-    if (status == 200) {
-      //atualiza_tabuleiro()
-      Future<Board> startGame(BuildContext context) async {
+      final getStateBoard = GetStateServer();
+      board = await getStateBoard.fetchBoardState();
+      notifyListeners();
 
-          final getBoardServer = BoardState();
-          Board status =
-              await getBoardServer.fetchBoardState();
-
-          if (status == 200) {
-            print('ok 2');
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Erro ao iniciar o jogo')),
-            );
-          }
-
-          return status;
-        }
-      print('ok');
-
-    } else {
+      final getWinner = GetWinnerStatus();
+      final response = await getWinner.checkWinner();
+      if (response.statusCode == 200) {
+        Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => const ModalAlert(),
+        );
+      } else {
+        Navigator.of(context).pop();
+        notifyListeners();
+      }
+    } catch (e) {
+      Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao iniciar o jogo')),
+        const SnackBar(content: Text('Erro ao processar a jogada do robô')),
       );
     }
-
-    return status;
-  }
   }
 
   String getRandomStartingPlayer() {

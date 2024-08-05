@@ -33,13 +33,12 @@ class FormStore {
     int status =
         await getNamesServer.getStart(player, selectedColor, opponentColor);
 
-    if (status == 200) {
-      print('ok');
+    if (status == 500) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => GameScreen(
             playerPieceColor: selectedColor,
-            robotPieceColor: selectedColor == 'Verde' ? 'Roxo' : 'Verde',
+            robotPieceColor: opponentColor,
             startingPlayer: selectedPlayer,
             pieceColor: '',
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/game.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/form_store.dart';
 import 'package:google_fonts/google_fonts.dart';
 

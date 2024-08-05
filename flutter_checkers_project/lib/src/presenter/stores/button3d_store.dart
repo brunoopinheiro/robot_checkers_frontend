@@ -31,9 +31,16 @@ class ButtonStore {
 
   void release() {
     position = 4;
+    onPressed();
   }
-  
-  
+
+  Color getButtonColor() {
+    return enabled ? color : Colors.grey;
+  }
+
+  Color getShadowColor() {
+    return enabled ? darken(color, shadowDegree) : darken(Colors.grey, shadowDegree);
+  }
 
   Color darken(Color color, ShadowDegree degree) {
     double amount = degree == ShadowDegree.dark ? 0.3 : 0.12;
