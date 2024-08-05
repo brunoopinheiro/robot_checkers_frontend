@@ -67,13 +67,11 @@ flutter:
      - assets/gifs/gif_celebration.gif
      - assets/images/avatar.png
      - assets/images/avatar.jpg
-     - assets/gifs/checkers.gif
      - assets/images/checkers.jpg
-     - assets/gifs/robo.gif
      - assets/images/dado.png
      - assets/images/robot_avatar.png
      - assets/images/human_avatar.png
-
+     - assets/images/crown.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

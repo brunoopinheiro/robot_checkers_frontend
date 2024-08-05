@@ -33,7 +33,7 @@ class FormStore {
     int status =
         await getNamesServer.getStart(player, selectedColor, opponentColor);
 
-    if (status == 500) {
+    if (status == 200) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => GameScreen(

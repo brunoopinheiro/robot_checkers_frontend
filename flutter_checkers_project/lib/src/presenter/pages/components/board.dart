@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
 import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart' as component;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart' as component;
 
 class CheckerBoard extends StatefulWidget {
   final String playerPieceColor;
@@ -78,8 +79,8 @@ class _CheckerBoardState extends State<CheckerBoard> {
             ),
             child: piece != null
                 ? Center(
-                    child: component.Piece(
-                      size: 40,
+                    child: component.PieceCheckers(
+                      size: 45,
                       color: piece.color == "purple"
                           ? widget.robotPieceColor == 'Roxo'
                               ? Colors.purple
