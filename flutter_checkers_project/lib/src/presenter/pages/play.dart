@@ -42,7 +42,7 @@ class _PlayScreenState extends State<PlayScreen>
                 builder: (context, child) {
                   return Transform.scale(
                     scale: _playStore.scaleAnimation.value,
-                    child: const StaticBoard(), // Atualizado para StaticBoard
+                    child: const StaticBoard(), 
                   );
                 },
               ),
@@ -52,9 +52,9 @@ class _PlayScreenState extends State<PlayScreen>
                   width: 850,
                   height: 220,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(239, 1, 10, 34),
+                    color: const Color.fromARGB(239, 1, 10, 34),
                     border: Border.all(
-                      color: Color.fromARGB(155, 0, 75, 236),
+                      color: const Color.fromARGB(155, 0, 75, 236),
                       width: 3,
                     ),
                     borderRadius: BorderRadius.circular(20),

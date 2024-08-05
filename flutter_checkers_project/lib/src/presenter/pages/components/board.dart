@@ -21,14 +21,11 @@ class CheckerBoard extends StatefulWidget {
 class _CheckerBoardState extends State<CheckerBoard> {
   final BoardStore boardStore = BoardStore();
 
-  Future<proto.Board> _getBoard() async {
-    return await boardStore.fetchBoardState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<proto.Board>(
-      future: _getBoard(),
+      future: boardStore.fetchBoardState(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
