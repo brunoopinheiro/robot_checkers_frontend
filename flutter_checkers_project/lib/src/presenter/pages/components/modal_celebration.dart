@@ -1,65 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-class ModalAlert extends StatelessWidget {
-  const ModalAlert({super.key});
+class ModalCelebration extends StatelessWidget {
+  const ModalCelebration({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Dialog(),
-        ),
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      backgroundColor: const Color.fromARGB(
+        209,
+        0,
+        1,
+        54,
       ),
-      color: Color.fromARGB(0, 0, 0, 0),
-    );
-  }
-}
-
-class Dialog extends StatelessWidget {
-  const Dialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text('GANHADOR: ', style: GoogleFonts.getFont('Play', textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
-              Image.asset('assets/gifs/gif_celebration.gif', height: 150, width: 150,),
-            ],
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            'GANHADOR: ',
+            style: GoogleFonts.getFont('Black Ops One',
+                textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 255, 255, 255))),
           ),
-          actions: <Widget>[
-            Center(
-              child: Column(
-                children: [
-                  AnimatedButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    height: 40,
-                    width: 120,
-                    child: Text('Cancel', 
-                    style: GoogleFonts.getFont('Play',
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromARGB(255, 14, 14, 14))),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ]
-        ),
+          Image.asset('assets/gifs/gif_celebration.gif',
+              height: 150, width: 150),
+        ],
       ),
-      child: const Text('Show Dialog'),
     );
   }
 }
-

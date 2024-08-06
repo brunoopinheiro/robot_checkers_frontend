@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class PieceCheckers extends StatelessWidget {
   final Color color;
   final double size;
+  final bool isQueen; 
   final void Function()? onTap;
 
   const PieceCheckers({
     super.key,
     required this.color,
     required this.size,
+    this.isQueen = false, 
     this.onTap,
   });
 
@@ -32,23 +34,29 @@ class PieceCheckers extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-              width: size - 10,
-              height: size - 10,
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    offset: const Offset(1.0, 1.0),
-                    blurRadius: 2.0,
-                  ),
-                ],
-              ),
-              child: Image.asset('assets/images/crown.png', width: 20.0, height: 2.0,),
-            ),
+            child: isQueen
+                ? Container(
+                    padding: const EdgeInsets.all(5),
+                    width: size - 10,
+                    height: size - 10,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          offset: const Offset(1.0, 1.0),
+                          blurRadius: 2.0,
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/crown.png',
+                      width: 20.0,
+                      height: 20.0,
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ),
         ),
       ),

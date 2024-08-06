@@ -6,11 +6,11 @@ class Piece extends StatelessWidget {
   final void Function()? onTap;
 
   const Piece({
-    super.key,
+    Key? key,
     required this.color,
     required this.size,
     this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

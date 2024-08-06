@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart'
+    as component;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart'; // Importa o Piece
 import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart' as component;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart' as component;
 
 class CheckerBoard extends StatefulWidget {
   final String playerPieceColor;
@@ -19,8 +20,13 @@ class CheckerBoard extends StatefulWidget {
 }
 
 class _CheckerBoardState extends State<CheckerBoard> {
-  final BoardStore boardStore = BoardStore();
+  late final BoardStore boardStore;
 
+  @override
+  void initState() {
+    super.initState();
+    boardStore = BoardStore();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +64,17 @@ class _CheckerBoardState extends State<CheckerBoard> {
           final proto.Piece? piece =
               square.hasContent() ? square.content : null;
 
+          Color pieceColor = Colors.transparent;
+          bool isQueen = false;
+          if (piece != null) {
+            pieceColor = boardStore.getPieceColor(
+              piece,
+              widget.playerPieceColor,
+              widget.robotPieceColor,
+            );
+            isQueen = boardStore.isQueen(piece);
+          }
+
           return Container(
             decoration: BoxDecoration(
               color: squareColor,
@@ -76,18 +93,18 @@ class _CheckerBoardState extends State<CheckerBoard> {
             ),
             child: piece != null
                 ? Center(
-                    child: component.PieceCheckers(
-                      size: 45,
-                      color: piece.color == "purple"
-                          ? widget.robotPieceColor == 'Roxo'
-                              ? Colors.purple
-                              : Colors.green
-                          : widget.playerPieceColor == 'Verde'
-                              ? Colors.green
-                              : Colors.purple,
-                    ),
+                    child: isQueen
+                        ? component.PieceCheckers(
+                            color: pieceColor,
+                            size: 45,
+                            isQueen: isQueen,
+                          )
+                        : Piece(
+                            color: pieceColor,
+                            size: 45,
+                          ),
                   )
-                : null,
+                : const SizedBox.shrink(),
           );
         },
         itemCount: 64,
@@ -95,4 +112,3 @@ class _CheckerBoardState extends State<CheckerBoard> {
     );
   }
 }
-

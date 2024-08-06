@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
-import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
+import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
 
 class BoardStore {
   final int rows;
@@ -26,24 +26,30 @@ class BoardStore {
         : const Color.fromARGB(255, 219, 219, 219);
   }
 
-  Color? getPieceColor(int row, int column) {
-    if (isWhiteSquare(row, column) && (row < 3 || row > 4)) {
-      return row < 3 ? Colors.purple : const Color.fromARGB(255, 22, 122, 25);
+  Color getPieceColor(proto.Piece piece, String playerColor, String robotColor) {
+    if (piece.color == 'verde') {
+      return playerColor == 'verde' ? Colors.green : Colors.purple;
+    } else if (piece.color == 'roxo') {
+      return playerColor == 'roxo' ? Colors.purple : Colors.green;
     }
-    return null;
+    return Colors.transparent;
   }
 
-  Future<Board> fetchBoardState() async {
+  bool isQueen(proto.Piece piece) {
+    return piece.type == proto.Piece_Type.QUEEN;
+  }
+
+  Future<proto.Board> fetchBoardState() async {
     return _getStateServer.fetchBoardState();
   }
 
   Future<void> simulatePlayerRobot(BuildContext context) async {
-  try {
-    await fetchBoardState();
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Erro ao simular jogada do robô')),
-    );
+    try {
+      await fetchBoardState();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Erro ao simular jogada do robô')),
+      );
+    }
   }
-}
 }

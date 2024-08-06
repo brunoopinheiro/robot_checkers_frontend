@@ -198,7 +198,7 @@ class _ModalForm extends State<ModalForm> {
                   style: GoogleFonts.getFont('Play',
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0)),
+                      color: const Color.fromARGB(255, 0, 0, 0)),
                 ),
               ),
             ),

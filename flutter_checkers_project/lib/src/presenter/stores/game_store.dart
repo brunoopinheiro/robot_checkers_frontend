@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_player_robot_server.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_winner_state.dart';
+import 'package:flutter_checkers_project/src/presenter/pages/components/modal_celebration.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/modal_celebration.dart';
 
 class GameStore with ChangeNotifier {
   String playerPieceColor = 'Verde';
@@ -45,7 +45,9 @@ class GameStore with ChangeNotifier {
 
     try {
       final getPlayerRobotServer = GetPlayerRobotServer();
-      await getPlayerRobotServer.indicateRobotPlay();
+      await getPlayerRobotServer
+          .indicateRobotPlay()
+          .timeout(const Duration(seconds: 180));
 
       final getStateBoard = GetStateServer();
       board = await getStateBoard.fetchBoardState();
@@ -53,21 +55,33 @@ class GameStore with ChangeNotifier {
 
       final getWinner = GetWinnerStatus();
       final response = await getWinner.checkWinner();
-      if (response.statusCode == 200) {
+
+      if (response.statusCode == 204) {
         Navigator.of(context).pop();
+
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => const ModalAlert(),
+          builder: (BuildContext context) => const ModalPlay(),
+        );
+      } else if (response.statusCode == 404) {
+        Navigator.of(context).pop();
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ModalCelebration(),
+          ),
         );
       } else {
         Navigator.of(context).pop();
+
         notifyListeners();
       }
     } catch (e) {
       Navigator.of(context).pop();
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao processar a jogada do robô')),
+        const SnackBar(content: Text('Erro ao processar a jogada')),
       );
     }
   }

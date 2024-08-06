@@ -40,7 +40,7 @@ class FormStore {
             playerPieceColor: selectedColor,
             robotPieceColor: opponentColor,
             startingPlayer: selectedPlayer,
-            pieceColor: '',
+            pieceColor: selectedColor, 
           ),
         ),
       );
