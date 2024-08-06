@@ -4,7 +4,6 @@ import 'package:flutter_checkers_project/src/external/datasources/get_board_stat
 import 'package:flutter_checkers_project/src/external/datasources/get_winner_state.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/modal_celebration.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/modal_player_robot.dart';
 
 class GameStore with ChangeNotifier {
   String playerPieceColor = 'Verde';
@@ -37,35 +36,30 @@ class GameStore with ChangeNotifier {
   }
 
   Future<void> simulatePlayerRobot(BuildContext context) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) => const ModalPlay(),
-    );
 
     try {
       final getPlayerRobotServer = GetPlayerRobotServer();
-      await getPlayerRobotServer
-          .indicateRobotPlay()
-          .timeout(const Duration(seconds: 180));
+      await getPlayerRobotServer.indicateRobotPlay(context);
 
       final getStateBoard = GetStateServer();
       board = await getStateBoard.fetchBoardState();
-      notifyListeners();
+      //notifyListeners();
 
       final getWinner = GetWinnerStatus();
       final response = await getWinner.checkWinner();
 
-      if (response.statusCode == 204) {
-        Navigator.of(context).pop();
 
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) => const ModalPlay(),
-        );
+
+      if (response.statusCode == 204) {
+        //Navigator.of(context).pop();
+
+        // showDialog(
+        //   context: context,
+        //   barrierDismissible: false,
+        //   builder: (BuildContext context) => const ModalPlay(),
+        // );
       } else if (response.statusCode == 404) {
-        Navigator.of(context).pop();
+        //Navigator.of(context).pop();
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -78,7 +72,6 @@ class GameStore with ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      Navigator.of(context).pop();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Erro ao processar a jogada')),

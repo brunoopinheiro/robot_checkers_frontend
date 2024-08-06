@@ -21,12 +21,20 @@ class CheckerBoard extends StatefulWidget {
 
 class _CheckerBoardState extends State<CheckerBoard> {
   late final BoardStore boardStore;
+  late Future<proto.Board> futureBoardState;
 
   @override
   void initState() {
     super.initState();
     boardStore = BoardStore();
+    //futureBoardState = boardStore.fetchBoardState();
   }
+
+  // void _reload() {
+  //   setState(() {
+  //     futureBoardState = boardStore.fetchBoardState();
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
