@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 
 class GetStateServer {
   Future<Board> fetchBoardState() async {
-    final response =
-        await http.get(Uri.parse('http://localhost:5000/game/state'));
+    final response = await http
+        .get(Uri.parse('http://localhost:5000/game/state'))
+        .timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 404) {
       throw Exception('No dames found or game not started');
@@ -13,16 +14,5 @@ class GetStateServer {
     }
 
     return Board.fromBuffer(response.bodyBytes);
-  }
-
-  bool hasDames(Board board) {
-    for (var row in board.rows) {
-      for (var square in row.squares) {
-        if (square.content.type == Piece_Type.QUEEN) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 }

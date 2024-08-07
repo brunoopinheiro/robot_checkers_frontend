@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart'
-    as component;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart'; // Importa o Piece
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart' as component;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart'; 
 import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
+import 'package:provider/provider.dart';
 
-class CheckerBoard extends StatefulWidget {
+class CheckerBoard extends StatelessWidget {
   final String playerPieceColor;
   final String robotPieceColor;
 
@@ -16,47 +16,16 @@ class CheckerBoard extends StatefulWidget {
   });
 
   @override
-  _CheckerBoardState createState() => _CheckerBoardState();
-}
-
-class _CheckerBoardState extends State<CheckerBoard> {
-  late final BoardStore boardStore;
-  late Future<proto.Board> futureBoardState;
-
-  @override
-  void initState() {
-    super.initState();
-    boardStore = BoardStore();
-    futureBoardState = boardStore.fetchBoardState();
-    //indicatePlayRobot() com o novo estado do tabuleiro 
-  }
-
-  // void _reload() {
-  //   setState(() {
-  //     futureBoardState = boardStore.fetchBoardState();
-  //   });
-  // }
-
-  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<proto.Board>(
-      future: boardStore.fetchBoardState(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Erro: ${snapshot.error}'));
-        } else {
-          final board = snapshot.data;
-          return board != null
-              ? _buildDynamicBoard(board)
-              : const SizedBox.shrink();
-        }
+    return Consumer<BoardStore>(
+      builder: (context, boardStore, child) {
+        final board = boardStore.board;
+        return _buildDynamicBoard(board, context, boardStore);
       },
     );
   }
 
-  Widget _buildDynamicBoard(proto.Board board) {
+  Widget _buildDynamicBoard(proto.Board board, BuildContext context, BoardStore boardStore) {
     return Container(
       width: 600,
       height: 600,
@@ -68,18 +37,22 @@ class _CheckerBoardState extends State<CheckerBoard> {
         itemBuilder: (BuildContext context, int index) {
           final int row = index ~/ 8;
           final int column = index % 8;
+
+          if (row >= board.rows.length || column >= board.rows[row].squares.length) {
+            return const SizedBox.shrink();
+          }
+
           final proto.Square square = board.rows[row].squares[column];
           final Color squareColor = boardStore.getSquareColor(row, column);
-          final proto.Piece? piece =
-              square.hasContent() ? square.content : null;
+          final proto.Piece? piece = square.hasContent() ? square.content : null;
 
           Color pieceColor = Colors.transparent;
           bool isQueen = false;
           if (piece != null) {
             pieceColor = boardStore.getPieceColor(
               piece,
-              widget.playerPieceColor,
-              widget.robotPieceColor,
+              playerPieceColor,
+              robotPieceColor,
             );
             isQueen = boardStore.isQueen(piece);
           }
