@@ -39,11 +39,12 @@ class GameStore with ChangeNotifier {
 
     try {
       final getPlayerRobotServer = GetPlayerRobotServer();
-      await getPlayerRobotServer.indicateRobotPlay(context);
+      await getPlayerRobotServer.indicateRobotPlay().timeout(const Duration(seconds: 30));
 
-      final getStateBoard = GetStateServer();
-      board = await getStateBoard.fetchBoardState();
+      // final getStateBoard = GetStateServer();
+      // board = await getStateBoard.fetchBoardState();
       //notifyListeners();
+
 
       final getWinner = GetWinnerStatus();
       final response = await getWinner.checkWinner();

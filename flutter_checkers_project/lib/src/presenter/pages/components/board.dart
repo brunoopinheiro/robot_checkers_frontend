@@ -27,7 +27,7 @@ class _CheckerBoardState extends State<CheckerBoard> {
   void initState() {
     super.initState();
     boardStore = BoardStore();
-    //futureBoardState = boardStore.fetchBoardState();
+    futureBoardState = boardStore.fetchBoardState();
   }
 
   // void _reload() {

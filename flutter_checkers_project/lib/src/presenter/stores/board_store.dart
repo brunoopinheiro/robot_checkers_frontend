@@ -13,7 +13,8 @@ class BoardStore {
     this.columns = 8,
     this.pieceSize = 45,
     GetStateServer? getStateServer,
-  }) : _getStateServer = getStateServer ?? GetStateServer();
+  })
+  : _getStateServer = getStateServer ?? GetStateServer();
 
   bool isWhiteSquare(int row, int column) {
     return (row % 2 == 0 && column % 2 == 1) ||
@@ -43,13 +44,13 @@ class BoardStore {
     return _getStateServer.fetchBoardState();
   }
 
-  Future<void> simulatePlayerRobot(BuildContext context) async {
-    try {
-      await fetchBoardState();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao simular jogada do robô')),
-      );
-    }
-  }
+  // Future<void> simulatePlayerRobot(BuildContext context) async {
+  //   try {
+  //     await fetchBoardState();
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Erro ao simular jogada do robô')),
+  //     );
+  //   }
+  // }
 }
