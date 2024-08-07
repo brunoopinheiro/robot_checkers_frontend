@@ -44,13 +44,4 @@ class BoardStore {
     return _getStateServer.fetchBoardState();
   }
 
-  // Future<void> simulatePlayerRobot(BuildContext context) async {
-  //   try {
-  //     await fetchBoardState();
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('Erro ao simular jogada do robô')),
-  //     );
-  //   }
-  // }
 }

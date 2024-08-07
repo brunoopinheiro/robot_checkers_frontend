@@ -28,6 +28,7 @@ class _CheckerBoardState extends State<CheckerBoard> {
     super.initState();
     boardStore = BoardStore();
     futureBoardState = boardStore.fetchBoardState();
+    //indicatePlayRobot() com o novo estado do tabuleiro 
   }
 
   // void _reload() {

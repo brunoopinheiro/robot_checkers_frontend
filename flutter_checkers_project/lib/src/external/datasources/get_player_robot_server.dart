@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart';
 import 'package:http/http.dart' as http;
 
