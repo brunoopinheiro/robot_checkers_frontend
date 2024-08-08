@@ -13,7 +13,7 @@ class _ModalPlayRobot extends State<ModalPlay> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color.fromARGB(246, 202, 202, 202),
+      backgroundColor: const Color.fromARGB(246, 202, 202, 202),
       content: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

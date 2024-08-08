@@ -35,9 +35,9 @@ class BoardStore extends ChangeNotifier {
   Color getPieceColor(
       proto.Piece piece, String playerColor, String robotColor) {
     if (piece.color == 'verde') {
-      return playerColor == 'verde' ? Colors.green : Colors.purple;
+      return playerColor == 'verde' ? Colors.purple : Colors.green;
     } else if (piece.color == 'roxo') {
-      return playerColor == 'roxo' ? Colors.purple : Colors.green;
+      return playerColor == 'roxo' ? Colors.green : Colors.purple;
     }
     return Colors.transparent;
   }

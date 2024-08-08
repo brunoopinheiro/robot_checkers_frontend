@@ -15,6 +15,7 @@ class CheckerBoard extends StatelessWidget {
     required this.robotPieceColor,
   });
 
+  
   @override
   Widget build(BuildContext context) {
     return Consumer<BoardStore>(
@@ -24,6 +25,7 @@ class CheckerBoard extends StatelessWidget {
       },
     );
   }
+
 
   Widget _buildDynamicBoard(proto.Board board, BuildContext context, BoardStore boardStore) {
     return Container(

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/game_store.dart';
 
+
 class GameScreen extends StatelessWidget {
   const GameScreen({
     Key? key,
@@ -18,6 +19,7 @@ class GameScreen extends StatelessWidget {
   final String robotPieceColor;
   final String startingPlayer;
   final String pieceColor;
+
 
   @override
   Widget build(BuildContext context) {
