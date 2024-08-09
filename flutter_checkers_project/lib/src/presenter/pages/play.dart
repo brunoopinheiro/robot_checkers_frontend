@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/presenter/pages/components/static_board.dart'; // Atualize o caminho do import se necessário
+import 'package:flutter_checkers_project/src/presenter/pages/components/static_board.dart'; 
 import 'package:flutter_checkers_project/src/presenter/pages/components/button3d.dart';
 import 'package:flutter_checkers_project/src/presenter/pages/components/title.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/play_store.dart';

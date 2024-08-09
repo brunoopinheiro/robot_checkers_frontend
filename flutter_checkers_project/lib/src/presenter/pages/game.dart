@@ -122,7 +122,8 @@ class GameScreen extends StatelessWidget {
                         textStyle: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: Color.fromARGB(255, 0, 0, 0)
+                      )),
                   ),
                 ),
               ],

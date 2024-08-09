@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
-import 'package:flutter_checkers_project/src/proto/messages.pbserver.dart';
 import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
 
 class BoardStore extends ChangeNotifier {
@@ -55,7 +54,6 @@ class BoardStore extends ChangeNotifier {
       updateBoard(boardState);
     } catch (error) {
       print('Erro ao buscar estado do tabuleiro: $error');
-      // Adicione tratamento de erros conforme necessário
     }
   }
 }
