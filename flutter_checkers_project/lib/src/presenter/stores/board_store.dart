@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
+import 'package:flutter_checkers_project/src/proto/messages.pbserver.dart';
+import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
 
 class BoardStore extends ChangeNotifier {
   final int rows;
   final int columns;
   final double pieceSize;
+  final GetStateServer _stateServer = GetStateServer();
 
   BoardStore({
     this.rows = 8,
@@ -44,5 +47,15 @@ class BoardStore extends ChangeNotifier {
 
   bool isQueen(proto.Piece piece) {
     return piece.type == proto.Piece_Type.QUEEN;
+  }
+
+  Future<void> fetchBoardState() async {
+    try {
+      final boardState = await _stateServer.fetchBoardState();
+      updateBoard(boardState);
+    } catch (error) {
+      print('Erro ao buscar estado do tabuleiro: $error');
+      // Adicione tratamento de erros conforme necessário
+    }
   }
 }

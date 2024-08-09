@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart' as component;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart'; 
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart'
+    as component;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
 import 'package:provider/provider.dart';
 
-class CheckerBoard extends StatelessWidget {
+class CheckerBoard extends StatefulWidget {
   final String playerPieceColor;
   final String robotPieceColor;
 
@@ -15,7 +16,22 @@ class CheckerBoard extends StatelessWidget {
     required this.robotPieceColor,
   });
 
-  
+  @override
+  _CheckerBoardState createState() => _CheckerBoardState();
+}
+
+class _CheckerBoardState extends State<CheckerBoard> {
+  @override
+  void initState() {
+    super.initState();
+    _fetchBoardState();
+  }
+
+  Future<void> _fetchBoardState() async {
+    final boardStore = Provider.of<BoardStore>(context, listen: false);
+    await boardStore.fetchBoardState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<BoardStore>(
@@ -26,8 +42,8 @@ class CheckerBoard extends StatelessWidget {
     );
   }
 
-
-  Widget _buildDynamicBoard(proto.Board board, BuildContext context, BoardStore boardStore) {
+  Widget _buildDynamicBoard(
+      proto.Board board, BuildContext context, BoardStore boardStore) {
     return Container(
       width: 600,
       height: 600,
@@ -40,21 +56,23 @@ class CheckerBoard extends StatelessWidget {
           final int row = index ~/ 8;
           final int column = index % 8;
 
-          if (row >= board.rows.length || column >= board.rows[row].squares.length) {
+          if (row >= board.rows.length ||
+              column >= board.rows[row].squares.length) {
             return const SizedBox.shrink();
           }
 
           final proto.Square square = board.rows[row].squares[column];
           final Color squareColor = boardStore.getSquareColor(row, column);
-          final proto.Piece? piece = square.hasContent() ? square.content : null;
+          final proto.Piece? piece =
+              square.hasContent() ? square.content : null;
 
           Color pieceColor = Colors.transparent;
           bool isQueen = false;
           if (piece != null) {
             pieceColor = boardStore.getPieceColor(
               piece,
-              playerPieceColor,
-              robotPieceColor,
+              widget.playerPieceColor,
+              widget.robotPieceColor,
             );
             isQueen = boardStore.isQueen(piece);
           }
