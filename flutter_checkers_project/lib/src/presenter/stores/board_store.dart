@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
+import 'package:flutter_checkers_project/src/proto/messages.pbserver.dart';
+import 'package:flutter_checkers_project/src/external/datasources/get_board_state.dart';
 
-class BoardStore {
+class BoardStore extends ChangeNotifier {
   final int rows;
   final int columns;
   final double pieceSize;
-  final GetStateServer _getStateServer;
+  final GetStateServer _stateServer = GetStateServer();
 
   BoardStore({
     this.rows = 8,
     this.columns = 8,
     this.pieceSize = 45,
-    GetStateServer? getStateServer,
-  }) : _getStateServer = getStateServer ?? GetStateServer();
+  });
+
+  proto.Board _board = proto.Board();
+
+  proto.Board get board => _board;
+
+  void updateBoard(proto.Board newBoard) {
+    _board = newBoard;
+    notifyListeners();
+  }
 
   bool isWhiteSquare(int row, int column) {
     return (row % 2 == 0 && column % 2 == 1) ||
@@ -26,11 +35,12 @@ class BoardStore {
         : const Color.fromARGB(255, 219, 219, 219);
   }
 
-  Color getPieceColor(proto.Piece piece, String playerColor, String robotColor) {
+  Color getPieceColor(
+      proto.Piece piece, String playerColor, String robotColor) {
     if (piece.color == 'verde') {
-      return playerColor == 'verde' ? Colors.green : Colors.purple;
+      return playerColor == 'verde' ? Colors.purple : Colors.green;
     } else if (piece.color == 'roxo') {
-      return playerColor == 'roxo' ? Colors.purple : Colors.green;
+      return playerColor == 'roxo' ? Colors.green : Colors.purple;
     }
     return Colors.transparent;
   }
@@ -39,17 +49,13 @@ class BoardStore {
     return piece.type == proto.Piece_Type.QUEEN;
   }
 
-  Future<proto.Board> fetchBoardState() async {
-    return _getStateServer.fetchBoardState();
-  }
-
-  Future<void> simulatePlayerRobot(BuildContext context) async {
+  Future<void> fetchBoardState() async {
     try {
-      await fetchBoardState();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao simular jogada do robô')),
-      );
+      final boardState = await _stateServer.fetchBoardState();
+      updateBoard(boardState);
+    } catch (error) {
+      print('Erro ao buscar estado do tabuleiro: $error');
+      // Adicione tratamento de erros conforme necessário
     }
   }
 }
