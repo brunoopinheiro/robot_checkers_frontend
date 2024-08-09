@@ -54,7 +54,6 @@ class BoardStore extends ChangeNotifier {
       updateBoard(boardState);
     } catch (error) {
       print('Erro ao buscar estado do tabuleiro: $error');
-      // Adicione tratamento de erros conforme necessário
     }
   }
 }

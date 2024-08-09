@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_checkers_project/src/proto/messages.pb.dart' as proto;
-import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart'
-    as component;
+import 'package:flutter_checkers_project/src/presenter/pages/components/piece_checker.dart' as component;
 import 'package:flutter_checkers_project/src/presenter/pages/components/piece.dart';
 import 'package:flutter_checkers_project/src/presenter/stores/board_store.dart';
 import 'package:provider/provider.dart';
